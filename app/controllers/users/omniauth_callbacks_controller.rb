@@ -6,6 +6,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     oauthorize "Facebook"
   end
   
+  def google
+    oauthorize "Google"
+  end
+  
   def passthru
     render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
   end
@@ -14,7 +18,7 @@ private
 
   def oauthorize(kind)
     @user = find_for_ouath(kind, env["omniauth.auth"], current_user)
-    if @user
+    if @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => kind
       session["devise.#{kind.downcase}_data"] = env["omniauth.auth"]
       sign_in_and_redirect @user, :event => :authentication
@@ -34,6 +38,15 @@ private
         :name => access_token['extra']['raw_info']['name'], 
         :link => access_token['extra']['raw_info']['link'], 
         :image_url => access_token['info']['image'] 
+      }
+    when "Google"
+      uid = access_token['uid']
+      email = access_token['info']['email']
+      auth_attr = { 
+        :uid => uid,
+        :token => access_token['credentials']['token'],
+        :secret => nil, 
+        :name => access_token['info']['name'], 
       }
     else
       raise 'Provider #{provider} not handled'

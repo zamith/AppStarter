@@ -7,4 +7,5 @@ class ApplicationController < ActionController::Base
   def stored_location_for(resource_or_scope)
     root_url
   end
+
 end

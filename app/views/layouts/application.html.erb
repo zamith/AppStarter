@@ -21,9 +21,11 @@
       <%= link_to "Sign up", new_registration_path(User.new) %>
     <% end -%>
 
-      <% User.omniauth_providers.each do |provider| %>
-        <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(User.new,provider) %>
-      <% end -%>
+    <% User.omniauth_providers.each do |provider| %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(User.new,provider) %>
+    <% end -%>
+
+    <%#= link_to "Photo", "https://www.google.com/m8/feeds/photos/media/default/#{current_user.uid}" %>
   <% end %>
 
   <%= yield %>

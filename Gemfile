@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-openid'
 gem 'uuidtools'
+gem 'thin'
 
 
 # Gems used only for assets and not required

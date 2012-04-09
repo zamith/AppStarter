@@ -213,6 +213,14 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :facebook, "387891007905465", "0cb143f301a74968289daf606b29dbec",
     { :scope => 'email, offline_access' }
+    
+  require 'openid/store/filesystem'
+  config.omniauth :open_id, 
+                  :store => OpenID::Store::Filesystem.new('/tmp'), 
+                  :name => 'google', 
+                  :identifier => 'https://www.google.com/accounts/o8/id', 
+                  :require => 'omniauth-openid'
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
