@@ -13,6 +13,16 @@ gem 'omniauth-openid'
 gem 'uuidtools'
 gem 'thin'
 
+group :test do
+  gem 'simplecov', :require => false
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'rspec-rails'
+  gem "factory_girl", "2.6.4"
+end
+
 
 # Gems used only for assets and not required
 # in production environments by default.
